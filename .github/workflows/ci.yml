@@ -122,7 +122,7 @@ jobs:
 
       - name: Build bin
         run :
-        cargo build -vv --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
+          cargo build -vv --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
 
       - name: Prepare binary publish
