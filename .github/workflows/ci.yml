@@ -11,7 +11,7 @@ jobs:
       matrix:
         config:
           - os: 'ubuntu-22.04'
-            target: aarch64-unknown-linux-gnu
+            target: aarch64-linux-android
             variant: release
 
     env:
