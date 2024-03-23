@@ -122,8 +122,23 @@ jobs:
 
       - name: Build bin
         run :
-          cargo build -vv --locked ${{ env.CARGO_VARIANT_FLAG }}
+          cargo build -vv --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
+
+      - name: Test
+        env:
+          SCCACHE_IDLE_TIMEOUT: 0
+        run:
+          cargo test -vv --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
+          --target ${{ matrix.config.target }}
+
+      - name: Clippy
+        run:
+          cargo clippy --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
+          --target ${{ matrix.config.target }} -- -D clippy::all
+
+      - name: Rustfmt
+        run: cargo fmt -- --check
 
       - name: Prepare binary publish
         run: gzip -9c
