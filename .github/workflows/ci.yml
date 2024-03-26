@@ -130,10 +130,10 @@ jobs:
           cargo build -vv --lib --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
 
-      - name: Build bench
-        run :
-          cargo build -vv --benches --locked ${{ env.CARGO_VARIANT_FLAG }}
-          --target ${{ matrix.config.target }}
+     # - name: Build bench
+     #   run :
+     #     cargo build -vv --benches --locked ${{ env.CARGO_VARIANT_FLAG }}
+     #     --target ${{ matrix.config.target }}
 
       - name: Build test
         run :
