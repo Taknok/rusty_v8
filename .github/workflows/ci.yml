@@ -122,7 +122,22 @@ jobs:
 
       - name: Build bin
         run :
-          cargo build -vv --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
+          cargo build -vv --bins --locked ${{ env.CARGO_VARIANT_FLAG }}
+          --target ${{ matrix.config.target }}
+
+      - name: Build lib
+        run :
+          cargo build -vv --lib --locked ${{ env.CARGO_VARIANT_FLAG }}
+          --target ${{ matrix.config.target }}
+
+      - name: Build bench
+        run :
+          cargo build -vv --benches --locked ${{ env.CARGO_VARIANT_FLAG }}
+          --target ${{ matrix.config.target }}
+
+      - name: Build test
+        run :
+          cargo build -vv --tests --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
 
       - name: Test
