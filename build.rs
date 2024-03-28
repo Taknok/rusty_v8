@@ -191,7 +191,7 @@ fn build_v8() {
       // https://github.com/rust-lang/rust/pull/85806
       download_file(
         "https://dl.google.com/android/repository/android-ndk-r26c-linux.zip",
-        "./third_party/android-ndk-r26c-linux.zip",
+        "./third_party/android-ndk-r26c-linux.zip".into(),
       );
 
       assert!(Command::new("unzip")
