@@ -190,7 +190,7 @@ fn build_v8() {
       // NDK 23 and above removes libgcc entirely.
       // https://github.com/rust-lang/rust/pull/85806
       download_file(
-        "https://dl.google.com/android/repository/android-ndk-r26c-linux.zip",
+        "https://dl.google.com/android/repository/android-ndk-r26c-linux.zip".to_string(),
         "./third_party/android-ndk-r26c-linux.zip".into(),
       );
 
