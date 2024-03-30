@@ -196,6 +196,7 @@ fn build_v8() {
 
       assert!(Command::new("unzip")
       .arg("./third_party/android-ndk-r26c-linux.zip")
+      .arg("-d").arg("./third_party/")
       .status()
       .unwrap()
       .success());
