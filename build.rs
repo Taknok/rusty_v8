@@ -189,7 +189,7 @@ fn build_v8() {
 
       // NDK 23 and above removes libgcc entirely.
       // https://github.com/rust-lang/rust/pull/85806
-      if !Path::new("./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android22-clang++").exists() {
+      if !Path::new("./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang++").exists() {
         assert!(Command::new("curl")
         .arg("-L")
         .arg("-o").arg("./third_party/android-ndk-r26c-linux.zip")
@@ -199,8 +199,10 @@ fn build_v8() {
         .success());
 
         assert!(Command::new("unzip")
-        .arg("./third_party/android-ndk-r26c-linux.zip")
         .arg("-d").arg("./third_party/")
+        .arg("-o")
+        .arg("-q")
+        .arg("./third_party/android-ndk-r26c-linux.zip")
         .status()
         .unwrap()
         .success());
@@ -238,7 +240,6 @@ fn build_v8() {
   let gn_out = maybe_gen(&gn_root, gn_args);
   assert!(gn_out.exists());
   assert!(gn_out.join("args.gn").exists());
-  println!("*********************************************************1");
   if env::var_os("NO_PRINT_GN_ARGS").is_none() {
     print_gn_args(&gn_out);
   }
