@@ -1,5 +1,3 @@
-[target.aarch64-linux-android]
-image = "cross:aarch64-linux-android-0.2.1"
 
 [build.env]
 passthrough = [
@@ -7,5 +5,9 @@ passthrough = [
     "SCCACHE_ERROR_LOG",
     "SCCACHE_LOG",
     "SCCACHE_DIR",
-    "SCCACHE_IDLE_TIMEOUT"
+    "SCCACHE_IDLE_TIMEOUT",
+    "CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER=./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android24-clang++"
 ]
+
+[target.aarch64-linux-android]
+image = "test:latest"
