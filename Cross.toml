@@ -1,4 +1,3 @@
-
 [build.env]
 passthrough = [
     "V8_FROM_SOURCE",
@@ -10,4 +9,4 @@ passthrough = [
 ]
 
 [target.aarch64-linux-android]
-image = "test:latest"
+image = "cross-rusty_v8:aarch64-linux-android"
