@@ -43,7 +43,7 @@ jobs:
       - name: Install cross compilation toolchain
         if: matrix.config.target == 'aarch64-linux-android'
         run: |
-          rustup target add aarch64-linux-android
+          curl -qLO- https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-musl.tar.gz | sudo tar xvzf -C /usr/bin/
 
           sudo apt update
           sudo apt install -yq unzip
@@ -123,6 +123,7 @@ jobs:
 
       - name: Build bin
         run :
+          env &&
           cargo build -vv --bins --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
 
