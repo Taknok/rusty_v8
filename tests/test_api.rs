@@ -8929,6 +8929,7 @@ fn compile_function() {
   assert_eq!(42 * 1337, result.int32_value(scope).unwrap());
 }
 
+#[cfg(not(target_os = "android"))]
 static EXAMPLE_STRING: v8::OneByteConst =
   v8::String::create_external_onebyte_const(b"const static");
 
