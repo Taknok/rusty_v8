@@ -43,7 +43,7 @@ jobs:
       - name: Install cross compilation toolchain
         if: matrix.config.target == 'aarch64-linux-android'
         run: |
-          curl https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-musl.tar.gz | sudo tar xz
+          curl -qL https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-musl.tar.gz  | tar xz
 
           sudo apt update
           sudo apt install -yq unzip
