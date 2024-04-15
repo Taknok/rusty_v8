@@ -47,6 +47,8 @@ jobs:
           curl -qL https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-musl.tar.gz  | tar xz -C /home/runner/.local/bin
           ln -s /home/runner/.local/bin/cross /home/runner/.local/bin/cargo
 
+          sudo docker build --build-arg CROSS_BASE_IMAGE=ghcr.io/cross-rs/aarch64-linux-android:0.2.5 -t cross-rusty_v8:aarch64-linux-android .
+
           sudo apt update
           sudo apt install -yq unzip
           # sudo apt install -yq --no-install-suggests --no-install-recommends \
