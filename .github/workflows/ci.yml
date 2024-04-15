@@ -45,7 +45,7 @@ jobs:
         run: |
           mkdir -p /home/runner/.local/bin
           curl -qL https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-musl.tar.gz  | tar xz -C /home/runner/.local/bin
-          ln -s /home/runner/.local/bin/cross /home/runner/.local/bin/cargo
+          # ln -s /home/runner/.local/bin/cross /home/runner/.local/bin/cargo
 
           sudo docker build --build-arg CROSS_BASE_IMAGE=ghcr.io/cross-rs/aarch64-linux-android:0.2.5 -t cross-rusty_v8:aarch64-linux-android .
 
@@ -127,13 +127,12 @@ jobs:
 
       - name: Build bin
         run :
-          env &&
-          cargo build -vv --bins --locked ${{ env.CARGO_VARIANT_FLAG }}
+          cross build -vv --bins --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
 
       - name: Build lib
         run :
-          cargo build -vv --lib --locked ${{ env.CARGO_VARIANT_FLAG }}
+          cross build -vv --lib --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
 
      # - name: Build bench
@@ -143,19 +142,19 @@ jobs:
 
       - name: Build test
         run :
-          cargo build -vv --tests --locked ${{ env.CARGO_VARIANT_FLAG }}
+          cross build -vv --tests --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
 
       - name: Test
         env:
           SCCACHE_IDLE_TIMEOUT: 0
         run:
-          cargo test -vv --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
+          cross test -vv --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }}
 
       - name: Clippy
         run:
-          cargo clippy --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
+          cross clippy --all-targets --locked ${{ env.CARGO_VARIANT_FLAG }}
           --target ${{ matrix.config.target }} -- -D clippy::all
 
       - name: Rustfmt
