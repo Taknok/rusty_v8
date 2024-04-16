@@ -317,6 +317,7 @@ fn download_ninja_gn_binaries() {
   let ninja = ninja.with_extension("exe");
 
   if !gn.exists() || !ninja.exists() {
+    println!("TARGET DIR: {}", &target_dir);
     assert!(Command::new(python())
       .arg("./tools/ninja_gn_binaries.py")
       .arg("--dir")
