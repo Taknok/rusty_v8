@@ -119,7 +119,7 @@ jobs:
         run: git submodule status --recursive > git_submodule_status.txt
 
       - name: Install cross and build custom image
-        if: contains(matrix.config.target, "linux-android")
+        if: contains(matrix.config.target, 'linux-android')
         run: |
           mkdir -p /home/runner/.local/bin
           curl -qL https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-musl.tar.gz  | tar xz -C /home/runner/.local/bin
