@@ -193,9 +193,9 @@ fn build_v8() {
         "unknown"
       };
 
-/*      if t_arch =="aarch64" {
-        gn_args.push(r#"v8_target_cpu="arm64""#.to_string());
-      }*/
+      if t_arch =="x86_64" {
+        maybe_install_sysroot("amd64");
+      }
 
       gn_args.push(format!(r#"v8_target_cpu="{}""#, arch).to_string());
       gn_args.push(format!(r#"target_cpu="{}""#, arch).to_string());
