@@ -186,16 +186,22 @@ fn build_v8() {
 
     if t_os == "android" {
       let arch = if t_arch == "x86_64" {
-        "x86_64"
+        "x64"
       } else if t_arch == "aarch64" {
         "arm64"
       } else {
         "unknown"
       };
 
-      gn_args.push(format!(r#"v8_target_cpu="{}""#, arch));
+/*      if t_arch =="aarch64" {
+        gn_args.push(r#"v8_target_cpu="arm64""#.to_string());
+      }*/
+
+      gn_args.push(format!(r#"v8_target_cpu="{}""#, arch).to_string());
+      gn_args.push(format!(r#"target_cpu="{}""#, arch).to_string());
       gn_args.push(r#"target_os="android""#.to_string());
       gn_args.push("treat_warnings_as_errors=false".to_string());
+      gn_args.push("use_sysroot=true".to_string());
 
       // NDK 23 and above removes libgcc entirely.
       // https://github.com/rust-lang/rust/pull/85806
