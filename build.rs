@@ -181,10 +181,20 @@ fn build_v8() {
       maybe_install_sysroot("amd64");
     };
 
-    if target_triple == "aarch64-linux-android" {
-      gn_args.push(r#"v8_target_cpu="arm64""#.to_string());
-      gn_args.push(r#"target_os="android""#.to_string());
+    let t_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    let t_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
 
+    if t_os == "android" {
+      let arch = if t_arch == "x86_64" {
+        "x86_64"
+      } else if t_arch == "aarch64" {
+        "arm64"
+      } else {
+        "unknown"
+      };
+
+      gn_args.push(format!(r#"v8_target_cpu="{}""#, arch));
+      gn_args.push(r#"target_os="android""#.to_string());
       gn_args.push("treat_warnings_as_errors=false".to_string());
 
       // NDK 23 and above removes libgcc entirely.
