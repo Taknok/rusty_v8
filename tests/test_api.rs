@@ -7366,11 +7366,13 @@ fn module_snapshot() {
   }
 }
 
+#[cfg(not(all(target_os = "android", target_arch = "x86_64")))]
 #[derive(Default)]
 struct TestHeapLimitState {
   near_heap_limit_callback_calls: u64,
 }
 
+#[cfg(not(all(target_os = "android", target_arch = "x86_64")))]
 extern "C" fn heap_limit_callback(
   data: *mut c_void,
   current_heap_limit: usize,
