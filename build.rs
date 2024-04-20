@@ -193,7 +193,7 @@ fn build_v8() {
         "unknown"
       };
 
-      if t_arch =="x86_64" {
+      if t_arch == "x86_64" {
         maybe_install_sysroot("amd64");
       }
 
